@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # デプロイするブランチを指定
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install flask flask-assets libsass
+
+      - name: Build and generate static files
+        run: |
+          echo "Creating build script"
+          echo "import os" > build.py
+          echo "from app import app, assets" >> build.py
+          echo "with app.app_context():" >> build.py
+          echo "    assets['scss_all'].build()" >> build.py
+          echo "    if not os.path.exists('static_output'):" >> build.py
+          echo "        os.makedirs('static_output')" >> build.py
+          echo "    # ここで静的ファイルを生成する処理を追加します" >> build.py
+          python build.py
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./static_output
