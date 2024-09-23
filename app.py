@@ -11,13 +11,13 @@ assets.register('scss_all', scss)
 def index():
     return render_template('home.html')
 
-# @app.route('/mp3-player')
-# def mp3_player():
-#     return render_template('mp3-player.html')
+@app.route('/mp3-player')
+def mp3_player():
+    return render_template('mp3-player.html')
 
-# @app.route('/mp4-player')
-# def mp4_player():
-#     return render_template('mp4-player.html')
+@app.route('/mp4-player')
+def mp4_player():
+    return render_template('mp4-player.html')
 
 if __name__ == '__main__':
     with app.app_context():
