@@ -25,9 +25,15 @@ jobs:
 
       - name: Build static files
         run: |
-          if [ -d "static_output" ]; then rm -rf static_output; fi
-          mkdir static_output
-          python -c "import shutil; shutil.copytree('templates', 'static_output')"
+          python -c "
+          import os
+          import shutil
+          output_dir = 'static_output'
+          if os.path.exists(output_dir):
+          shutil.rmtree(output_dir)
+          shutil.copytree('templates', output_dir)
+          "
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
