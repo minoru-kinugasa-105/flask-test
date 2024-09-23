@@ -25,6 +25,7 @@ jobs:
 
       - name: Build static files
         run: |
+          if [ -d "static_output" ]; then rm -rf static_output; fi
           mkdir static_output
           python -c "import shutil; shutil.copytree('templates', 'static_output')"
 
