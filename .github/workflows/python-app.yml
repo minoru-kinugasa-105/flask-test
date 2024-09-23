@@ -21,12 +21,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install Flask  # 必要なパッケージを追加
+          pip install -r requirements.txt  # requirements.txtから依存関係をインストール
 
       - name: Generate HTML
         run: |
           # Flaskアプリをバックグラウンドで実行
           nohup python -m flask run &
+          # ポートが開くのを待つ
+          sleep 5
           # 適切なエンドポイントにアクセスしてHTMLを生成
           curl http://127.0.0.1:5000/ -o static_output/home.html
 
