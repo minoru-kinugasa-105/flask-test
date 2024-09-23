@@ -30,7 +30,7 @@ jobs:
           import shutil
           output_dir = 'static_output'
           if os.path.exists(output_dir):
-          shutil.rmtree(output_dir)
+            shutil.rmtree(output_dir)
           shutil.copytree('templates', output_dir)
           "
 
