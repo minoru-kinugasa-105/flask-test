@@ -1,4 +1,7 @@
 :root {
+    --white: #ffffff;
+    --gray: #cccccc;
+    --gray-transparent: #cccccc58;
     --yellow-50: #fffbeb;
     --yellow-100: #fcd34d;
     --yellow-200: #eab308;
@@ -6,3 +9,130 @@
     --yellow-400: #713f12;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: var(--yellow-50);
+}
+
+.wrapper {
+    background-color: var(--white);
+    padding: 2em;
+    position: absolute;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    box-shadow: 0 1em 1em var(--gray);
+}
+
+#placement {
+    width: 100%;
+    border: 2px solid var(--yellow-100);
+    padding: .5em 1em;
+    outline: none;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.options {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+select {
+    appearance: none;
+    width: 150px;
+    padding: .45em .9em .45em 1.5em;
+    font-size: 1.25em;
+    letter-spacing: .5px;
+    cursor: pointer;
+    background-color: var(--yellow-300);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: .3em;
+}
+select::-ms-expand {
+    display: none;
+}
+
+select option {
+    background-color: var(--yellow-50);
+    color: var(--yellow-400);
+    letter-spacing: .06em;
+    font-weight: 400;
+    font-size: 1.12em;
+}
+
+.selected {
+    display: none;
+}
+
+.color-inp {
+    appearance: none;
+    background-color: transparent;
+    width: 150px;
+    height: 50px;
+    outline: none;
+    border-radius: .3em;
+    border: 1px solid var(--white);
+}
+.color-inp::-webkit-color-swatch {
+    border: .18em solid var(--yellow-100);
+    border-radius: .3em;
+}
+
+.color-inp::-moz-color-swatch {
+    border: .18em solid var(--yellow-100);
+    border-radius: .3em;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box button,
+.box a {
+    font-size: 1em;
+    padding: .8em 2em;
+    letter-spacing: 4px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: .5em;
+    margin-top: 1em;
+    height: 50px;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: var(--yellow-200);
+    border: none;
+    color: var(--white);
+}
+
+.box a {
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    padding: 25px 0;
+    background-color: var(--gray-transparent);
+    border-radius: 10px;
+}
+
+.hide {
+    display: none;
+}

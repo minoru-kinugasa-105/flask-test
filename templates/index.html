@@ -1,7 +1,22 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}QR Code Generator{% endblock %} {%
+block content %}
 
-{% block title %}QR Code Generator{% endblock %}
+<div class="wrapper">
+    <input type="text" id="placement" placeholder="Enter some text or URL" />
+    <div class="options">
+        <select class="size">
+            <option value="100">100 x 100</option>
+            <option value="200">200 x 200</option>
+            <option value="300">300 x 300</option>
+        </select>
+        <input type="color" class="color-inp" id="color1" />
+        <input type="color" class="color-inp" id="color2" />
+    </div>
 
-{% block content %}
-
+    <div class="container"></div>
+    <div class="box">
+        <button id="generate" disabled>Generate</button>
+        <a href="#" id="download-btn">Download</a>
+    </div>
+</div>
 {% endblock %}
