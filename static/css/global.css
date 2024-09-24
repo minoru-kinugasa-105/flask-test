@@ -31,6 +31,12 @@ body {
     box-shadow: 0 1em 1em var(--gray);
 }
 
+@media screen and (max-width: 600px) {
+        .wrapper {
+            width: 90vw;
+        }
+}
+
 #placement {
     width: 100%;
     border: 2px solid var(--yellow-100);
