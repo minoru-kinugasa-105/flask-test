@@ -1,7 +1,6 @@
 :root {
     --white: #ffffff;
     --gray: #cccccc;
-    --gray-transparent: #cccccc58;
     --yellow-50: #fffbeb;
     --yellow-100: #fcd34d;
     --yellow-200: #eab308;
@@ -129,7 +128,7 @@ select option {
     justify-content: center;
     margin-top: 15px;
     padding: 25px 0;
-    background-color: var(--gray-transparent);
+    background-color: var(--yellow-50);
     border-radius: 10px;
 }
 
