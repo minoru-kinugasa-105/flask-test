@@ -16,4 +16,5 @@ QRコードは、スマートフォンなどのデバイスで簡単に読み取
 * QRコードの背景色と色を選択する機能
 
 ## サンプル
+デザインは色んな人のGeneratorを参考にしました...
 <img width="594" alt="image" src="https://github.com/user-attachments/assets/b01bda5c-a0ac-49b2-8415-296a21bf3585">
