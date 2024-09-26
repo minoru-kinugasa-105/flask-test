@@ -1,4 +1,4 @@
-name: Deploy static files to GitHub Pages
+name: Flask to GitHub Pages
 
 on:
   push:
@@ -6,14 +6,39 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # リポジトリのチェックアウト
       - uses: actions/checkout@v2
 
+      # Pythonのセットアップ
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+
+      # Flaskのインストール
+      - name: Install dependencies
+        run: |
+          pip install flask
+          pip install gunicorn  # Flaskをプロダクション環境で使用するため
+
+      # 静的HTMLファイルを生成する
+      # Flaskサーバーを起動し、静的HTMLを取得して保存するスクリプトを実行します
+      - name: Generate static files
+        run: |
+          mkdir -p public
+          # Flaskサーバーをバックグラウンドで実行
+          nohup gunicorn --bind 127.0.0.1:5000 app:app &
+          sleep 5  # サーバーの準備待ち
+          curl http://127.0.0.1:5000 > public/index.html  # 静的HTMLファイルとして保存
+          # 必要に応じて他のルートからもHTMLを生成
+
+      # GitHub Pagesにデプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public  # ここに静的ファイルを保存するディレクトリ
+          publish_dir: ./public  # 生成した静的HTMLファイルが保存されているディレクトリ
