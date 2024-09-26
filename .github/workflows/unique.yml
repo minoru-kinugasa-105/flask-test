@@ -1,15 +1,12 @@
-name: ワークフローの名前
+name: 公開時のワークフロー
 
 on:
     push:
         branches:
             - main
-    pull_request:
-        branches:
-            - main
 
 jobs:
-    build:
+    deploy:
         runs-on: ubuntu-latest
 
         steps:
@@ -20,5 +17,5 @@ jobs:
                   python-version: "3.8"
             - name: Install Flask
               run: pip3 install flask
-            - name: Run Flask
+            - name: Run Flask for deployment
               run: python app.py
