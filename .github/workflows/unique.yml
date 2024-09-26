@@ -19,26 +19,30 @@ jobs:
         with:
           python-version: "3.8"
 
-      # Flaskのインストール
+      # Flaskとその他の依存関係をインストール
       - name: Install dependencies
         run: |
           pip install flask
-          pip install gunicorn  # Flaskをプロダクション環境で使用するため
+          pip install gunicorn
 
-      # 静的HTMLファイルを生成する
-      # Flaskサーバーを起動し、静的HTMLを取得して保存するスクリプトを実行します
-      - name: Generate static files
+      # Flaskサーバーをバックグラウンドで実行し、HTMLを生成
+      - name: Generate static HTML files
         run: |
           mkdir -p public
-          # Flaskサーバーをバックグラウンドで実行
           nohup gunicorn --bind 127.0.0.1:5000 app:app &
-          sleep 5  # サーバーの準備待ち
-          curl http://127.0.0.1:5000 > public/index.html  # 静的HTMLファイルとして保存
-          # 必要に応じて他のルートからもHTMLを生成
+          sleep 5  # サーバーが起動するまでの待機
+          curl http://127.0.0.1:5000 > public/index.html  # ルートパスのHTMLを保存
+          # 必要なら他のルートのHTMLも保存可能
+          # 例: curl http://127.0.0.1:5000/about > public/about.html
 
-      # GitHub Pagesにデプロイ
+      # 静的ファイル (CSS, JS など) を public ディレクトリにコピー
+      - name: Copy static files
+        run: |
+          cp -R static/ public/static/
+
+      # GitHub Pages にデプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public  # 生成した静的HTMLファイルが保存されているディレクトリ
+          publish_dir: ./public  # 静的HTMLと静的ファイルが含まれたディレクトリ
